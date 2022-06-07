@@ -14,7 +14,19 @@ jobs:
       - run:
           name: Install brew (on Linux)
           command: |
-            sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            # See https://docs.brew.sh/Homebrew-on-Linux
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            # test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+            # test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+            # test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+            # echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+            echo "export PATH="/home/circleci/.linuxbrew/bin:$PATH" >> $BASH_ENV
+            
+            which brew
+      - run:
+          name: Verify brew installed
+          command: |
+            brew --version  
  
 workflows:
   main:
