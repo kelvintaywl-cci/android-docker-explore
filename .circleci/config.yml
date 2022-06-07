@@ -22,8 +22,6 @@ jobs:
             # echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
             
             echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >> $BASH_ENV
-            source $BASH_ENV
-            which brew
       - run:
           name: Verify brew installed
           command: |
