@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  install-tools:
+    resource_class: medium
+    docker:
+      - image: cimg/android:2021.10.1-ndk
+    steps:
+      - run:
+          name: Verify if tools are available
+          command: |
+            which brew || true
+            which bundletool || true
+       - run:
+           name: Install brew (on Linux)
+           command: |
+             sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ 
+workflows:
+  main:
+    jobs:
+      - install-tools
