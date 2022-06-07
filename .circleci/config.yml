@@ -20,14 +20,26 @@ jobs:
             # test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             # test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
             # echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+            
+            brew --version
+            
             echo "export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH" >> $BASH_ENV
             
             which brew
       - run:
           name: Verify brew installed
           command: |
-            brew --version  
- 
+            brew --version
+      - run:
+          name: Install bundletool via brew
+          command: |
+            # See https://formulae.brew.sh/formula/bundletool
+            brew install bundletool
+      - run:
+          name: Verify bundletool installed
+          command: |
+            which bundletool && bundletool --version
+
 workflows:
   main:
     jobs:
